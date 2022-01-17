@@ -15,7 +15,6 @@ export default function ResultDetails({ name, rate, review, image }) {
           style={{
             width: 200,
             height: 100,
-            backgroundColor: "yellow",
           }}
         />
       </View>

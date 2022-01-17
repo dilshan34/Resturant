@@ -3,9 +3,15 @@ import React from "react";
 import { View, Text, FlatList, TouchableOpacity } from "react-native";
 import ResultDetails from "./ResultDetails";
 //import {withnavigation} from "@react-navigation/stack"
+import "localstorage-polyfill";
 
 export default function ResultList({ title, filterResult, navigation }) {
   console.log("===============================", filterResult);
+
+  if (!filterResult.length) {
+    return null;
+  }
+
   return (
     <View>
       <View>
@@ -22,7 +28,10 @@ export default function ResultList({ title, filterResult, navigation }) {
             renderItem={({ item }) => {
               return (
                 <TouchableOpacity
-                  onPress={() => navigation.navigate("ResultShow")}
+                  onPress={() => {
+                    navigation.navigate("ResultShow", { id: item.id });
+                    localStorage.setItem("id", JSON.stringify(item.id));
+                  }}
                 >
                   <ResultDetails
                     name={item.name}
@@ -39,6 +48,5 @@ export default function ResultList({ title, filterResult, navigation }) {
     </View>
   );
 }
-
 
 //export default withNavigation(ResultList);
