@@ -9,7 +9,7 @@ export default () => {
     try {
       const response = await Yelp.get("/search", {
         params: {
-          limit: 25,
+          limit: 50,
           term: searchTerm,
           location: "san jose",
         },
@@ -22,7 +22,7 @@ export default () => {
   };
 
   useEffect(() => {
-    searchApi("pasta");
+    searchApi("bread");
   }, []);
 
   return [result, error, searchApi];

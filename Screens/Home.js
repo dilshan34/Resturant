@@ -10,6 +10,12 @@ export default function Home() {
   const [term, setTerm] = useState("");
   const [result, error, searchApi] = useResult();
 
+  const filterResultByPrice = (price) => {
+    return result.filter((results) => {
+      return results.price === price;
+    });
+  };
+
   return (
     <Container>
       <View style={{ flex: 1 }}>
@@ -21,14 +27,23 @@ export default function Home() {
         {/* <Text>{error}</Text> */}
       </View>
       <View style={{ flex: 3, backgroundColor: "white" }}>
-        <Text>{result.length}</Text>
-        <ResultList title="Cost Effective"/>
+        {/* <Text>{result.length}</Text> */}
+        <ResultList
+          title="Cost Effective"
+          filterResult={filterResultByPrice("$")}
+        />
       </View>
-      <View style={{ flex: 3, backgroundColor: "red" }}>
-        <ResultList title="Bit Prizer"/>
+      <View style={{ flex: 3}}>
+        <ResultList
+          title="Bit Prizer"
+          filterResult={filterResultByPrice("$$")}
+        />
       </View>
       <View style={{ flex: 3, backgroundColor: "white" }}>
-        <ResultList title="Big Spender"/>
+        <ResultList
+          title="Big Spender"
+          filterResult={filterResultByPrice("$$$")}
+        />
       </View>
     </Container>
   );
